@@ -1,0 +1,19 @@
+version: '3'
+services:
+  php:
+    image: yiisoftware/yii2-php:8.3-fpm-nginx
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports:
+      - '8000:80'
+
+  db:
+    image: mysql:8.0.37-debian
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:
+    driver: local
